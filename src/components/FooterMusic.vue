@@ -56,6 +56,7 @@
 
       <!-- audio播放 -->
       <audio
+        @canplay="getDuration"
         ref="audio"
         :src="`https://music.163.com/song/media/outer/url?id=${playList[playListIndex].id}.mp3`"
       ></audio>
@@ -66,12 +67,7 @@
         position="bottom"
         :style="{ height: '100%', width: '100%' }"
       >
-        <Player 
-        :play="play" 
-        :isBtnShow="isBtnShow"
-        :addDuration="addDuration"
-        :playList="playList"
-         />
+        <Player :play="play" :isBtnShow="isBtnShow" :playList="playList" />
       </van-popup>
     </div>
   </Transition>
@@ -80,26 +76,52 @@
 <script>
 // import ProgressCircle from './progress-circle'
 // import useCd from './use-cd'
+import { formatTime } from '@/assets/js/util'
+
 import Player from './player.vue'
+import { getMusicDuration } from '../api/item'
 import { mapState, useStore, mapMutations } from 'vuex'
+import { onMounted, ref } from 'vue'
 export default {
+  setup() {
+    const store = useStore()
+    let duration = 0
+    const getDuration = (e) => {
+      // console.log(e.target.duration);
+      duration = parseInt(e.target.duration)
+      // 拿到总时长的时候就 从小数 转成 整数
+      store.commit('updateDuration', duration)
+      // 把 duration 存入 vuex，方便 player组件访问
+      // console.log(duration);
+    }
+
+    return {
+      duration,
+      formatTime,
+      getDuration,
+    }
+  },
   data() {
     return {
       intervalID: 0,
-        
     }
   },
   components: {
     Player,
   },
   computed: {
-    ...mapState(['playList', 'playListIndex', 'detailShow', 'isBtnShow','currentTime']),
+    ...mapState([
+      'playList',
+      'playListIndex',
+      'detailShow',
+      'isBtnShow',
+      'currentTime',
+    ]),
   },
-  // components: {
-  //   ProgressCircle,
-  // },
-  
+
   mounted() {
+    //执行获取时长函数
+    // console.log(typeof(this.$refs.audio.currentTime));
     // console.log(this.$refs.audio.duration);
     // console.log(this.$refs)
     this.$store.dispatch('getLyric', this.playList[this.playListIndex].id)
@@ -108,9 +130,13 @@ export default {
   },
   updated() {
     this.$store.dispatch('getLyric', this.playList[this.playListIndex].id)
-    this.addDuration()
   },
   methods: {
+    // 获取时长
+    // async getDuration() {
+    //   let res = await getMusicDuration(this.playList[this.playListIndex].id)
+    //   // console.log(res)
+    // },
     play() {
       // 控制音乐的播放暂停
       if (this.$refs.audio.paused) {
@@ -126,24 +152,22 @@ export default {
       }
     },
 
-    // 一个 时间函数，用于控制歌词显示
-    // 当播放歌曲时，就需要持续触发这个函数
-    // 这个函数不仅在播放音乐的时候需要用到，渲染页面的时候也需要用到
+    // 更新当前时间
     updataTime() {
       this.intervalID = setInterval(() => {
-        this.updateCurrentTime(this.$refs.audio.currentTime)
+        // 一开始就把 currentTime 转成整数型
+        this.updateCurrentTime(parseInt(this.$refs.audio.currentTime))
       }, 1000)
-    },
-    addDuration() {
-      this.updateDuration(this.$refs.audio.duration)
     },
     ...mapMutations([
       'updateDetailShow',
       'updateIsBtnShow',
-      'updateCurrentTime',
-      'updateDuration'
+      'updateCurrentTime', // 更新当前时间
+      'updateFooterMusic',
+      'updateDuration', // 更新 vuex 的 歌曲总时长duration
     ]),
   },
+  created() {},
   // 监听下标发生了变化，就自动播放
   watch: {
     playListIndex: function () {

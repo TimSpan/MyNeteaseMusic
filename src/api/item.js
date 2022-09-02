@@ -16,7 +16,15 @@ export function getMusicAllList(data) {
 //获取歌曲的歌词 /lyric?id=33894312
 export function getMusicLyric(data){
   return request({
-      method:"GET",
-      url:`/lyric?id=${data}`
+     method:"GET",
+     url:`/lyric?id=${data}`
+  })
+}
+
+// 获取歌曲的时长
+export function getMusicDuration(data){
+  return request({
+    method:"GET",
+    url:`/song/detail?ids=${data}`
   })
 }

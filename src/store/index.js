@@ -29,13 +29,18 @@ export default createStore({
     detailShow: false, //歌曲详情页全屏的显示
     currentTime:0, //当前时间
     lyricLsit: {},// 歌词
-    duration:0// 歌曲总时长
+    duration: 0,// 歌曲总时长
+    footerMusic:{} ,//miniplay组件
   },
   getters: {},
   mutations: {
     // setFullScreen(state, fullScreen) {
     //   state.fullScreen = fullScreen
     // },
+
+    updateFooterMusic:function (state,value) {
+      state.footerMusic = value
+    },
 
     // 更新歌曲总时长
     updateDuration: function (state, value) {

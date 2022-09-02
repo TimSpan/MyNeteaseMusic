@@ -3,7 +3,7 @@ import request from './base'
 export function getSinger() {
   return request({
     method: 'GET',
-    url: '/top/artists?offset=0&limit=50',
+    url: '/top/artists?offset=0&limit=20',
   })
 }
 //获取歌手全部歌曲

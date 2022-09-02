@@ -22,6 +22,9 @@ import { mapMutations, mapState } from 'vuex'
 
 export default {
   props: ['songs'],
+  mounted() {
+    // this.footerMusic.updataTime()
+  },
   // setup(props) {
   //   // console.log(props)
   // },
@@ -29,13 +32,14 @@ export default {
   //   // console.log(this.songs)
   // },
   computed: {
-    ...mapState(['playList','playListIndex','currentTime','lyricList'])
+    ...mapState(['playList','playListIndex','currentTime','lyricList','footerMusic'])
   },
   methods: {
     playMusic: function (index) {
       this.updatePlayList(this.songs)
       this.updatePlayListIndex(index)
       this.updateIsBtnShow(false)
+      // footerMusic.updataTime()
       this.$store.dispatch('getLyric', this.playList[this.playListIndex].id);
     },
     ...mapMutations([

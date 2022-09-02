@@ -9,7 +9,7 @@ set -e
 # echo 'www.example.com' > CNAME
 git init
 git add -A
-git commit -m 'deploy'
+git commit -m '提交了新功能'
 # 如果发布到 https://<USERNAME>.github.io
 git push -f git@github.com:TimSpan/MyNeteaseMusic.git master
 # 如果发布到 https://<USERNAME>.github.io/<REPO>

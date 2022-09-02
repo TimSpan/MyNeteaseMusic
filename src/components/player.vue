@@ -29,9 +29,6 @@
                 />
               </div>
             </div>
-            <!-- <div class="playing-lyric-wrapper">
-              <div class="playing-lyric"></div>
-            </div> -->
           </div>
           <div
             class="middle-r"
@@ -41,6 +38,7 @@
           >
             <div class="lyric-wrapper">
               <div>
+                <!-- 实现歌词列表高亮显示 -->
                 <p
                   class="text"
                   v-for="(item, i) in lyric"
@@ -54,8 +52,8 @@
                   {{ item.lrc }}
                 </p>
               </div>
-              <!-- <div class="pure-music" v-show="pureMusicLyric">
-                <p>{{ pureMusicLyric }}</p>
+              <!-- <div class="pure-music" >
+                <p v-for="(item, i) in lyric" >{{ item.lrc }}</p>
               </div> -->
             </div>
           </div>
@@ -68,24 +66,20 @@
             <span class="dot active"></span>
           </div>
           <div class="progress-wrapper">
-            <span class="time time-l">
-              {{ parseFloat(currentTime).toFixed(2) }}</span
-            >
+            <span class="time time-l"> {{ formatTime(currentTime) }}</span>
             <div class="progress-bar-wrapper">
               <input
                 type="range"
                 class="range"
                 min="0"
-                :max="duration"
+                :max="this.duration"
                 v-model="currentTime"
                 step="0.05"
               />
-
-              <!-- <progress-bar></progress-bar> -->
             </div>
             <span class="time time-r">
               <!-- {{ (duration / 100).toFixed(2) }} -->
-              {{ (duration / 60).toFixed(2) }}
+              {{ formatTime(this.duration) }}
             </span>
           </div>
 
@@ -122,21 +116,27 @@
 <script>
 import { mapMutations, mapState, useStore } from 'vuex'
 // import { computed, ref, onMounted } from 'vue'
+import { formatTime } from '@/assets/js/util'
+
 export default {
+  setup() {
+    // console.log(props);
+    return {
+      formatTime,
+    }
+  },
   data() {
     return {
       islyricShow: false,
     }
   },
+
   mounted() {
     // console.log(this.lyricLsit.lyric) //未切割的歌词数据
     // console.log(this.lyric) //切割后的歌词数据
-    // this.addDuration()
   },
-  props: ['play', 'addDuration'],
-  // components: {
-  //   ProgressBar,
-  // },
+  props: ['play'],
+  created() {},
   computed: {
     ...mapState([
       'playList', // 歌曲列表
@@ -145,7 +145,7 @@ export default {
       'isBtnShow', // 按钮显示
       'lyricLsit', // 歌词
       'currentTime', // 当前播放时间
-      'duration',
+      'duration', //  从vuex获取 歌曲总时长
     ]),
     lyric: function () {
       let arr
@@ -158,7 +158,8 @@ export default {
           // 转换成整数
           let time =
             parseInt(min) * 60 * 1000 + parseInt(sec) * 1000 + parseInt(mill)
-          // console.log(min, sec, mill, lrc)
+
+          // console.log(min, sec, mill, lrc)// 打印歌词
           if (isNaN(Number(mill))) {
             mill = item.slice(7, 9)
             lrc = item.slice(10, item.length)
@@ -180,9 +181,7 @@ export default {
       return arr
     },
   },
-  // created() {
-  //   this.addDuration()
-  // },
+
   methods: {
     goBack() {
       this.updateDetailShow()
@@ -204,7 +203,6 @@ export default {
       'updateDetailShow',
       'updatePlayListIndex',
       'updateIsBtnShow',
-      'updateDuration',
     ]),
   },
   watch: {
@@ -219,19 +217,14 @@ export default {
       }
 
       // 如果歌曲播放完了，自动下一首歌
-      if (newValue >= this.duration) {
+      // 在这之前已经把 currentTime 和 duration 转成整数型了
+      // 所以 可以判断值是否相等
+      if (newValue == this.duration) {
+        // 问题出在这行代码
         this.updatePlayListIndex(this.playListIndex + 1)
       }
-
-      // console.log([this.$refs.offset])
-    },
-    duration: function (newValue) {
-      console.log(newValue)
-    },
-    // 我实现的关键：当歌曲下标发生变化了，就调用addDuration()函数
-    // 实时更新 vuex 的 duration
-    playListIndex: function () {
-      this.addDuration()
+      // 在这之前已经把 currentTime 和 duration 转成整数型了
+      console.log(newValue, this.duration)
     },
   },
 }

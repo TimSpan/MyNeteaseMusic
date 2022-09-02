@@ -17,6 +17,7 @@
     "axios-retry": "^3.1.9",
     "core-js": "^3.8.3",
     "create-keyframe-animation": "^0.1.0",
+    "daisyui": "^2.24.0",
     "good-storage": "^1.1.1",
     "lyric-parser": "^1.0.1",
     "sass": "^1.54.5",
@@ -32,10 +33,13 @@
     "@vue/cli-plugin-router": "~5.0.0",
     "@vue/cli-plugin-vuex": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
+    "autoprefixer": "^10.4.8",
     "less": "^4.0.0",
     "less-loader": "^8.0.0",
+    "node-sass": "^7.0.1",
+    "postcss": "^8.4.16",
     "sass-loader": "^13.0.2",
-    "node-sass": "^7.0.1"
+    "tailwindcss": "^3.1.8"
   },
   "browserslist": [
     "> 1%",

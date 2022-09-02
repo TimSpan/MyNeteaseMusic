@@ -10,6 +10,6 @@ export function getBanner() {
 export function getMusicList() {
   return request({
     method: 'GET',
-    url: '/personalized?limit=30',
+    url: '/personalized?limit=25',
   })
 }

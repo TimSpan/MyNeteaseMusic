@@ -4,8 +4,10 @@ import router from './router/router.js'
 import store from './store'
 import '@/assets/scss/index.scss'
 import Vant from 'vant'
-import 'vant/lib/index.css';
-import { ConfigProvider } from 'vant';
+import 'vant/lib/index.css'
+import { ConfigProvider } from 'vant'
+// 有需要再导入 tailwind.css
+// import "tailwindcss/tailwind.css"
 
 let app = createApp(App)
 app.use(ConfigProvider);
