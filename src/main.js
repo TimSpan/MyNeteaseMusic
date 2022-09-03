@@ -5,12 +5,12 @@ import store from './store'
 import '@/assets/scss/index.scss'
 import Vant from 'vant'
 import 'vant/lib/index.css'
-import { ConfigProvider } from 'vant'
+// import { ConfigProvider } from 'vant'
 // 有需要再导入 tailwind.css
 // import "tailwindcss/tailwind.css"
 
 let app = createApp(App)
-app.use(ConfigProvider);
+// app.use(ConfigProvider);
 app.use(router)
 app.use(store)
 app.use(Vant)

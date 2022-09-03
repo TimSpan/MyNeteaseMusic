@@ -1,6 +1,9 @@
 <template>
-  <singerList :singerList="artists" @select="selectSinger" />
-  <router-view :singer="selectSinger"></router-view>
+  <keep-alive>
+    <singerList :singerList="artists" />
+  </keep-alive>
+
+  <router-view></router-view>
 </template>
 
 <script>
@@ -11,39 +14,12 @@ export default {
   data() {
     return {
       artists: [], //所有歌手
-      selectSinger: null,
     }
   },
   async created() {
     const res = await getSinger()
     this.artists = res.data.artists
   },
-  methods: {
-    selectSinger(singer) {
-      this.selectSinger = singer
-      this.$router.push({
-        path: `/singer/${singer.id}`,
-      })
-    },
-  },
-  // setup() {
-  //   const state = reactive({
-  //     artists: [], //所有歌手
-  //     selectSinger:[]
-  //   })
-  //   onMounted(async () => {
-  //     let res = await getSinger()
-  //     // console.log(res)
-  //     state.artists = res.data.artists
-  //   })
-  //   function selectSinger(singer) {
-  //     state.selectSinger = singer
-  //     this.$router.push({
-  //       path:`/singer/${singer.id}`
-  //     })
-  //   }
-  //   return { state ,selectSinger}
-  // },
   components: {
     singerList,
   },

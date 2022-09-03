@@ -1,7 +1,11 @@
 <template>
   <div>
-    <Swiper></Swiper>
-    <HotSong></HotSong>
+    <keep-alive>
+      <Swiper></Swiper>
+    </keep-alive>
+    <keep-alive>
+      <HotSong></HotSong>
+    </keep-alive>
   </div>
 </template>
 
@@ -11,8 +15,7 @@ import HotSong from './recommend/hotSong.vue'
 export default {
   components: {
     Swiper,
-    HotSong
+    HotSong,
   },
 }
 </script>
-

@@ -9,7 +9,7 @@ set -e
 # echo 'www.example.com' > CNAME
 git init
 git add -A
-git commit -m '提交了新功能'
+git commit -m '新增歌手的热门50首歌曲页面以及播放歌手歌曲'
 # 如果发布到 https://<USERNAME>.github.io
 git push -f git@github.com:TimSpan/MyNeteaseMusic.git master
 # 如果发布到 https://<USERNAME>.github.io/<REPO>

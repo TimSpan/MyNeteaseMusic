@@ -2,8 +2,11 @@
   <div>
     <Header v-show="!$route.meta.a"></Header>
     <Tab v-show="!$route.meta.a"></Tab>
-    <router-view></router-view>
-    <FooterMusic/>
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
+
+    <FooterMusic />
   </div>
 </template>
 
@@ -15,7 +18,7 @@ export default {
   components: {
     Header,
     Tab,
-    FooterMusic
+    FooterMusic,
   },
 }
 </script>

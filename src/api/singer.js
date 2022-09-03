@@ -1,15 +1,15 @@
 import request from './base'
-// 获取首页轮播图的数据
+// 获取热门歌手
 export function getSinger() {
   return request({
     method: 'GET',
-    url: '/top/artists?offset=0&limit=20',
+    url: '/top/artists?offset=0',
   })
 }
-//获取歌手全部歌曲
-export function getSingerSongs() {
+//获取歌手热门50首歌曲
+export function getSingerSongs(singerID) {
   return request({
     method: 'GET',
-    url: '/artist/songs?id=2116&limit=25',
+    url: `/artist/top/song?id=${singerID}`,
   })
 }

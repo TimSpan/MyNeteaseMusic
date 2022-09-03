@@ -1,24 +1,19 @@
 <template>
   <div class="music-list">
-    <!-- 返回按钮 -->
-    <!-- <div class="background">
-          <img :src="playList[playListIndex].al.picUrl" />
-        </div> -->
-    <div class="fixed background" >
-      
+    <div class="fixed background">
       <div class="back" @click="$router.go(-1)">
         <i class="icon-back"></i>
       </div>
 
       <!-- 标题 -->
-      <h1 class="title">{{ playlist.name }}</h1>
+      <h1 class="title">{{ name }}</h1>
     </div>
 
     <div class="bg-image">
       <!-- <img class="images" :src="playlist.coverImgUrl" alt="" /> -->
-      <van-image class="images" :src="playlist.coverImgUrl" >
+      <van-image class="images" :src="img">
         <template v-slot:loading>
-          <van-loading  />
+          <van-loading />
         </template>
       </van-image>
       <!-- 随机播放全部 -->
@@ -29,14 +24,12 @@
         </div>
       </div>
     </div>
-    <!-- <Bottom /> -->
   </div>
-
 </template>
 
 <script>
 export default {
-  props: ['playlist'],
+  props: ['singerTopSongs', 'img', 'name'],
 }
 </script>
 
@@ -44,13 +37,13 @@ export default {
 :root {
   --van-image-placeholder-background-color: rgba(0, 0, 0, 0.3) !important;
   // --van-image-loading-icon-color:#333;
-  --van-background-color:rgba(0, 0, 0, 0.3)
+  --van-background-color: rgba(0, 0, 0, 0.3);
 }
 .music-list {
   position: relative;
   height: 100%;
   width: 100%;
-  .fixed{
+  .fixed {
     position: fixed;
     background-color: rgba(255, 205, 49, 0.5);
     top: 0;
@@ -78,15 +71,16 @@ export default {
     }
   }
   .title {
-    position: absolute;
-    padding-left: 0.4rem;
+    position: relative;
+    // padding-left: 0.4rem;
     top: 0;
-    left: 10%;
+    left: 20%;
     width: 60%;
     z-index: 20;
     transform: translateZ(2px);
     @include no-wrap();
     text-align: center;
+    // margin: 0 auto;
     line-height: 40px;
     font-size: $font-size-large;
     color: $color-text;
@@ -96,6 +90,7 @@ export default {
     position: relative;
     width: 100%;
     height: 7.5rem;
+    // background-size: contain;
     // transform-origin: top;
 
     .images {

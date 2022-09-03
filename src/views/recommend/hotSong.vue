@@ -10,7 +10,14 @@
               :to="{ path: '/hotSongMusic', query: { id: item.id } }"
             >
               <div class="icon">
-                <img width="60" height="60" :src="item.picUrl" />
+                <van-image class="images" :src="item.picUrl" width="60" height="60">
+                  <template v-slot:loading>
+                    <van-loading type="spinner" size="20" />
+                  </template>
+                </van-image>
+          
+
+                <!-- <img width="60" height="60"  :src="item.picUrl" /> -->
               </div>
               <div class="text">
                 <h2 class="name">
@@ -87,6 +94,9 @@ export default {
           flex: 0 0 60px;
           width: 60px;
           padding-right: 20px;
+          .images{
+            background-size: cover;
+          }
         }
 
         .text {

@@ -1,21 +1,17 @@
 <template>
   <!-- <van-loading > 加载中 -->
-    <ul class="song-list">
-      <li
-        @click="playMusic(index)"
-        class="item"
-        v-for="(song, index) in songs"
-        :key="index"
-      >
-        <div class="column">
-          <h2 class="name">{{ song.name }}</h2>
-
-          <p class="desc" v-for="(song1, index) in song.ar" :key="index">
-            {{ song1.name }}
-          </p>
-        </div>
-      </li>
-    </ul>
+  <ul class="song-list">
+    <li    
+      @click="playMusic(index)"  
+      class="item"
+      v-for="(song, index) in songs"
+      :key="index"
+    >
+      <div class="column">
+        <h2 class="name">{{ song.name }}</h2>
+      </div>
+    </li>
+  </ul>
   <!-- </van-loading> -->
 </template>
 
@@ -27,12 +23,7 @@ export default {
   mounted() {
     // this.footerMusic.updataTime()
   },
-  // setup(props) {
-  //   // console.log(props)
-  // },
-  // created() {
-  //   // console.log(this.songs)
-  // },
+
   computed: {
     ...mapState([
       'playList',

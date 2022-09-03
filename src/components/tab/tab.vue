@@ -32,6 +32,10 @@ export default {
           path: '/topList',
         },
         {
+          name: 'MV',
+          path: '/mv',
+        },
+        {
           name: '搜索',
           path: '/search',
         },

@@ -1,7 +1,12 @@
 <template>
   <div class="container">
-    <Top :playlist="state.playlist" />
-    <Bottom :songs="state.songs" />
+    <keep-alive>
+      <Top :playlist="state.playlist" />
+    </keep-alive>
+
+    <keep-alive>
+      <Bottom :songs="state.songs" />
+    </keep-alive>
   </div>
 </template>
 
@@ -46,10 +51,9 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.container{
+.container {
   width: 100%;
   overflow: hidden;
   margin-bottom: 30px;
 }
-
 </style>

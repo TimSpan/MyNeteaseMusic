@@ -220,7 +220,6 @@ export default {
       // 在这之前已经把 currentTime 和 duration 转成整数型了
       // 所以 可以判断值是否相等
       if (newValue == this.duration) {
-        // 问题出在这行代码
         this.updatePlayListIndex(this.playListIndex + 1)
       }
       // 在这之前已经把 currentTime 和 duration 转成整数型了
