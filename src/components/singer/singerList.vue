@@ -4,6 +4,7 @@
       <li class="group">
         <ul>
           <li v-for="item in singerList" :key="item.id">
+            <!-- 路由跳转 *********************-->
             <router-link
               class="item"
               :to="{

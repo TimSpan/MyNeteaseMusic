@@ -8,6 +8,7 @@ set -e
 # 如果是发布到自定义域名
 # echo 'www.example.com' > CNAME
 git init
+git status
 git add -A
 git commit -m '新增歌手的热门50首歌曲页面以及播放歌手歌曲'
 # 如果发布到 https://<USERNAME>.github.io

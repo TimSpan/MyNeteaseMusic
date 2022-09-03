@@ -23,24 +23,22 @@ export default createStore({
 
       },
     ],
-    fullScreen: false,
+
     playListIndex: 0, //默认下标
-    isBtnShow: true, //
+    isBtnShow: true, // 控制按钮的播放暂停
     detailShow: false, //歌曲详情页全屏的显示
     currentTime:0, //当前时间
     lyricLsit: {},// 歌词
     duration: 0,// 歌曲总时长
-    footerMusic:{} ,//miniplay组件
+    // footerMusic:{} ,
   },
   getters: {},
   mutations: {
-    // setFullScreen(state, fullScreen) {
-    //   state.fullScreen = fullScreen
-    // },
+    
 
-    updateFooterMusic:function (state,value) {
-      state.footerMusic = value
-    },
+    // updateFooterMusic:function (state,value) {
+    //   state.footerMusic = value
+    // },
 
     // 更新歌曲总时长
     updateDuration: function (state, value) {
@@ -60,6 +58,7 @@ export default createStore({
     updatePlayList: function (state, value) {
       state.playList = value
     },
+    // 更新歌曲下标
     updatePlayListIndex: function (state, value) {
       state.playListIndex = value
       // console.log(state.playListIndex);

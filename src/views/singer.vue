@@ -3,13 +3,15 @@
     <singerList :singerList="artists" />
   </keep-alive>
 
-  <router-view></router-view>
+  <keep-alive>
+    <router-view></router-view>
+  </keep-alive>
 </template>
 
 <script>
 import { getSinger } from '@/api/singer'
 // import { reactive, onMounted } from 'vue'
-import singerList from '@/components/base/singerList.vue'
+import singerList from '@/components/singer/singerList.vue'
 export default {
   data() {
     return {

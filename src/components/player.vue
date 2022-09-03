@@ -68,6 +68,8 @@
           <div class="progress-wrapper">
             <span class="time time-l"> {{ formatTime(currentTime) }}</span>
             <div class="progress-bar-wrapper">
+
+              <!-- 进度条 -->
               <input
                 type="range"
                 class="range"
@@ -85,9 +87,11 @@
 
           <!-- 按钮图标部分 -->
           <div class="operators">
+            <!-- 随机播放 -->
             <div class="icon i-left">
               <i class="icon-sequence"></i>
             </div>
+            <!-- 上一曲 -->
             <div class="icon i-left" @click="goPlay(-1)">
               <i class="icon-prev"></i>
             </div>
@@ -99,10 +103,11 @@
             <div class="icon i-center" v-else>
               <i class="icon-pause" @click="play"></i>
             </div>
-
+            <!-- 下一曲 -->
             <div class="icon i-right" @click="goPlay(1)">
               <i class="icon-next"></i>
             </div>
+            <!-- 收藏 -->
             <div class="icon i-right">
               <i class="icon-not-favorite"></i>
             </div>
@@ -147,6 +152,7 @@ export default {
       'currentTime', // 当前播放时间
       'duration', //  从vuex获取 歌曲总时长
     ]),
+    // 切割歌词 时分秒
     lyric: function () {
       let arr
       if (this.lyricLsit.lyric) {
@@ -184,13 +190,15 @@ export default {
 
   methods: {
     goBack() {
-      this.updateDetailShow()
+      this.updateDetailShow() // 退出全屏播放组件
     },
+
+    // 通过改变下标实现切换上一首  和  下一首
     goPlay(num) {
       // console.log(num)
-      // 通过改变下标实现切换上一首  和  下一首
       let index = this.playListIndex + num
       // console.log(index)
+      // 如果是最后一首歌 就返回到数组的 第一首
       if (index < 0) {
         index = this.playList.length - 1
       } else if (index === this.playList.length) {

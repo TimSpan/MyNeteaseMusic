@@ -25,14 +25,9 @@ import { mapMutations, mapState } from 'vuex'
 export default {
   props: ['songs'],
   mounted() {
-    // this.footerMusic.updataTime()
+
   },
-  // setup(props) {
-  //   // console.log(props)
-  // },
-  // created() {
-  //   // console.log(this.songs)
-  // },
+
   computed: {
     ...mapState([
       'playList',
@@ -43,12 +38,11 @@ export default {
     ]),
   },
   methods: {
-    playMusic: function (index) {
-      this.updatePlayList(this.songs)
-      this.updatePlayListIndex(index)
-      this.updateIsBtnShow(false)
-      // footerMusic.updataTime()
-      this.$store.dispatch('getLyric', this.playList[this.playListIndex].id)
+    playMusic: function (index) {// 接收传递过来的歌曲下标
+      this.updatePlayList(this.songs)// 更新vuex 的歌曲列表
+      this.updatePlayListIndex(index)// 更新vuex 的歌曲歌曲下标
+      this.updateIsBtnShow(false)// 更新播放按钮的布尔值
+      this.$store.dispatch('getLyric', this.playList[this.playListIndex].id)// 更新歌词
     },
     ...mapMutations([
       'updatePlayList',

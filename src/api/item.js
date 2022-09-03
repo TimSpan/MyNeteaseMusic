@@ -10,7 +10,7 @@ export function getMusicList(data) {
 export function getMusicAllList(data) {
   return request({
     method: 'GET',
-    url: `/playlist/track/all?id=${data}&offset=0`,
+    url: `/playlist/track/all?id=${data}&offset=0&limit=50`,
   })
 }
 //获取歌曲的歌词 /lyric?id=33894312

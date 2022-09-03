@@ -1,17 +1,20 @@
 <template>
   <!-- <van-loading > 加载中 -->
-  <ul class="song-list">
-    <li    
-      @click="playMusic(index)"  
-      class="item"
-      v-for="(song, index) in songs"
-      :key="index"
-    >
-      <div class="column">
-        <h2 class="name">{{ song.name }}</h2>
-      </div>
-    </li>
-  </ul>
+ 
+    <ul class="song-list">
+      <li
+        @click="playMusic(index)"
+        class="item"
+        v-for="(song, index) in songs"
+        :key="index"
+      >
+        <div class="column">
+          <h2 class="name">{{ song.name }}</h2>
+        </div>
+      </li>
+    </ul>
+ 
+
   <!-- </van-loading> -->
 </template>
 
@@ -30,16 +33,15 @@ export default {
       'playListIndex',
       'currentTime',
       'lyricList',
-      'footerMusic',
     ]),
   },
   methods: {
-    playMusic: function (index) {
-      this.updatePlayList(this.songs)
-      this.updatePlayListIndex(index)
-      this.updateIsBtnShow(false)
-      // footerMusic.updataTime()
-      this.$store.dispatch('getLyric', this.playList[this.playListIndex].id)
+    
+    playMusic: function (index) {// 接收传递过来的歌曲下标
+      this.updatePlayList(this.songs)// 更新vuex 的歌曲列表
+      this.updatePlayListIndex(index)// 更新vuex 的歌曲歌曲下标
+      this.updateIsBtnShow(false)// 更新播放按钮的布尔值
+      this.$store.dispatch('getLyric', this.playList[this.playListIndex].id)// 更新歌词
     },
     ...mapMutations([
       'updatePlayList',

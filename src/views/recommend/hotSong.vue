@@ -5,6 +5,7 @@
         <h1 class="list-title">热门歌单推荐</h1>
         <ul>
           <li v-for="item in state.musicList" class="item" :key="item.id">
+            <!-- 路由跳转 *********************-->
             <router-link
               class="item"
               :to="{ path: '/hotSongMusic', query: { id: item.id } }"
@@ -38,6 +39,7 @@
 <script>
 import { getMusicList } from '@/api/recommend'
 import { reactive, onMounted } from 'vue'
+// import { useRoute } from 'vue-router';
 export default {
   setup() {
     const state = reactive({

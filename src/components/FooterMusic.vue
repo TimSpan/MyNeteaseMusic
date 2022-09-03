@@ -15,6 +15,7 @@
         </div>
       </div>
 
+      <!-- 滑块 展示歌名  和  歌手 -->
       <div class="slider-wrapper" @click="updateDetailShow">
         <div class="slider-group">
           <div
@@ -32,16 +33,8 @@
           </div>
         </div>
       </div>
-      <!-- 播放按钮 -->
-      <!-- <svg
-        class="icon bofang"
-        aria-hidden="true"
-        @click="play(-1)"
-        v-if="isBtnShow"
-      >
-      
-        <use xlink:href="#icon-bofanganniu"></use>
-      </svg> -->
+
+      <!-- 播放暂停按钮 -->
       <div class="control" v-if="isBtnShow">
         <i class="icon-play-mini icon-mini" @click="play"></i>
       </div>
@@ -52,6 +45,7 @@
       <div class="control">
         <i class="icon-playlist"></i>
       </div>
+
       <!-- <playlist></playlist> -->
 
       <!-- audio播放 -->
@@ -79,9 +73,9 @@
 import { formatTime } from '@/assets/js/util'
 
 import Player from './player.vue'
-import { getMusicDuration } from '../api/item'
+// import { getMusicDuration } from '../api/item'
 import { mapState, useStore, mapMutations } from 'vuex'
-import { onMounted, ref } from 'vue'
+// import { onMounted, ref } from 'vue'
 export default {
   setup() {
     const store = useStore()
