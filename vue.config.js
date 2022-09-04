@@ -13,6 +13,6 @@ module.exports = {
     },
   },
   devServer: {
-    proxy: 'https://autumnfish.cn/'
+    proxy: 'http://1.117.229.35:3000/'
   }
 }

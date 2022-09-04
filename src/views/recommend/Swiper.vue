@@ -20,8 +20,6 @@ export default {
       let res = await getBanner()
       // console.log(res)
       state.images = res.data.banners
-      // axios.get('https://wangyiyun-api-six.vercel.app/banner?type=2').then((res) => {
-      // })
     })
     return { state }
   },

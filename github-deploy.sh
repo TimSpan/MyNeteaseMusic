@@ -10,7 +10,7 @@ set -e
 git init
 git status
 git add -A
-git commit -m '新增歌手的热门50首歌曲页面以及播放歌手歌曲'
+git commit -m '新增所有榜单以及优化代码'
 # 如果发布到 https://<USERNAME>.github.io
 git push -f git@github.com:TimSpan/MyNeteaseMusic.git master
 # 如果发布到 https://<USERNAME>.github.io/<REPO>

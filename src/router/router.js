@@ -6,7 +6,7 @@ const TopList = () => import('@/views/topList')
 const Search = () => import('@/views/search')
 const HotSongMusic = () => import('@/views/recommend/hotSongMusic')
 const SingerSongs = () => import('@/components/singer/singerSongsList.vue')
-
+const TopListMusic = () => import('@/views/topListMusic/topListMusic.vue')
 
 const routes = [
   {
@@ -18,15 +18,20 @@ const routes = [
     component: Recommend,
   },
   {
-    path: '/hotSongMusic',
+    path: '/hotSongMusic', // 推荐歌单歌曲
     component: HotSongMusic,
     meta: { a: true }
     // 路由权限控制方式：路由元信息（meta）
     // meta 数据并不是只读的，我们可以在代码中根据需求动态地改变它。
   },
   {
-    path: '/singerSongs',
+    path: '/singerSongs',// 歌手歌曲
     component: SingerSongs,
+    meta:{a:true}
+  },
+  {
+    path: '/topListMusic',// 榜单歌曲
+    component: TopListMusic ,
     meta:{a:true}
   },
   {

@@ -1,21 +1,21 @@
 <template>
   <!-- <van-loading > 加载中 -->
-    <ul class="song-list">
-      <li
-        @click="playMusic(index)"
-        class="item"
-        v-for="(song, index) in songs"
-        :key="index"
-      >
-        <div class="column">
-          <h2 class="name">{{ song.name }}</h2>
+  <ul class="song-list">
+    <li
+      @click="playMusic(index)"
+      class="item"
+      v-for="(song, index) in songs"
+      :key="index"
+    >
+      <div class="column">
+        <h2 class="name">{{ song.name }}</h2>
 
-          <p class="desc" v-for="(song1, index) in song.ar" :key="index">
-            {{ song1.name }}
-          </p>
-        </div>
-      </li>
-    </ul>
+        <p class="desc" v-for="(song1, index) in song.ar" :key="index">
+          {{ song1.name }}
+        </p>
+      </div>
+    </li>
+  </ul>
   <!-- </van-loading> -->
 </template>
 
@@ -24,9 +24,7 @@ import { mapMutations, mapState } from 'vuex'
 
 export default {
   props: ['songs'],
-  mounted() {
-
-  },
+  mounted() {},
 
   computed: {
     ...mapState([
@@ -38,11 +36,12 @@ export default {
     ]),
   },
   methods: {
-    playMusic: function (index) {// 接收传递过来的歌曲下标
-      this.updatePlayList(this.songs)// 更新vuex 的歌曲列表
-      this.updatePlayListIndex(index)// 更新vuex 的歌曲歌曲下标
-      this.updateIsBtnShow(false)// 更新播放按钮的布尔值
-      this.$store.dispatch('getLyric', this.playList[this.playListIndex].id)// 更新歌词
+    playMusic: function (index) {
+      // 接收传递过来的歌曲下标
+      this.updatePlayList(this.songs) // 更新vuex 的歌曲列表
+      this.updatePlayListIndex(index) // 更新vuex 的歌曲歌曲下标
+      this.updateIsBtnShow(false) // 更新播放按钮的布尔值
+      this.$store.dispatch('getLyric', this.playList[this.playListIndex].id) // 更新歌词
     },
     ...mapMutations([
       'updatePlayList',
@@ -75,8 +74,14 @@ export default {
     }
     .desc {
       @include no-wrap();
+      display: inline-block;
       font-size: $font-size-small;
       color: $color-text-d;
+      // margin-right: 0.2rem;
+      padding-right: 0.2rem;
+      // text-overflow: ellipsis;
+      // overflow: hidden;
+      // white-space: nowrap;
     }
   }
 }

@@ -45,29 +45,26 @@ export default {
   width: 100%;
   .fixed {
     position: fixed;
-    background-color: rgba(255, 205, 49, 0.5);
+    background-color: #333;
     top: 0;
     left: 0;
     right: 0;
     height: 0.8rem;
     z-index: 100;
   }
-  // .background{
-  //   // opacity: 0.6;
-  //   // filter: blur(20px);
-  // }
   .back {
     position: absolute;
     top: 0;
     left: 0.12rem;
     z-index: 20;
     transform: translateZ(2px);
+    
     .icon-back {
       display: block;
       line-height: 40px;
       padding-left: 0.2rem;
       font-size: $font-size-large-x;
-      color: $color-text;
+      color: $color-theme;
     }
   }
   .title {

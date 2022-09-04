@@ -1,54 +1,74 @@
 <template>
-  <div class="top-list">
-    <div class="top-list-content">
-      <ul>
-        <li class="item" v-for="item in topList" :key="item.id" >
-          <div class="icon">
-            <img width="100" height="100" :src="item.coverImgUrl" />
-          </div>
-          <!-- <ul class="song-list">
-            <li
-              class="song"
-              v-for="(song, index) in item.songList"
-              :key="song.id"
+  <keep-alive>
+    <div class="top-list">
+      <div class="top-list-content">
+        <ul>
+          <li v-for="item in topList" :key="item.id">
+            <router-link
+              class="item"
+              :to="{
+                path: '/topListMusic',
+                query: { id: item.id, name: item.name },
+              }"
             >
-              <span>{{ index + 1 }}. </span>
-              <span>{{ song.songName }}-{{ song.singerName }}</span>
-            </li>
-          </ul> -->
-        </li>
-      </ul>
+              <!-- 图片 -->
+
+              <van-image :src="item.coverImgUrl">
+                <template v-slot:loading>
+                  <van-loading type="spinner" size="20" />
+                </template>
+              </van-image>
+              <!-- 歌曲 -->
+              <ul class="song-list">
+                <li
+                  class="song"
+                  v-for="(song, index) in item.songList"
+                  :key="song.id"
+                >
+                  <span>{{ index + 1 }}. </span>
+                  <span>{{ song.name }}-{{ song.ar[0].name }}</span>
+                </li>
+              </ul>
+            </router-link>
+          </li>
+        </ul>
+      </div>
     </div>
-  </div>
+  </keep-alive>
 </template>
 
 <script>
+import topListMusic from './topListMusic/topListMusic.vue'
 import { getTopList, getTopListSongs } from '@/api/topList'
-
 export default {
-  components: {},
+  components: {
+    topListMusic,
+  },
   data() {
     return {
       topList: [],
-      // id: 0,
+      AllSongs: [],
     }
   },
-  mounted() {
-    console.log(this.$refs.songid)
-  },
   async created() {
-    
     //获取所有榜单
     const res = await getTopList()
-    console.log(res)
     this.topList = res.data.list
+    // console.log(this.topList)
+    // console.log(this.AllSongs)
 
- 
+    this.topList.forEach(async (item, index) => {
+      // console.log(index);
+      const id = JSON.stringify(item.id)
+      // console.log(id);
 
-    //获取榜单歌曲
+      // 获取所有歌曲
+      const { data } = await getTopListSongs(id)
+      // console.log(data);//所有歌曲
+      this.AllSongs.push(data.playlist.tracks) //存储所有歌曲
 
-    const result = await getTopListSongs()
-    // console.log(result)
+      this.topList[index].songList = data.playlist.tracks.splice(0, 3) //要添加进数组的元素
+    })
   },
   methods: {},
 }
@@ -64,16 +84,12 @@ export default {
   .top-list-content {
     height: 100%;
     overflow: scroll;
-
     .item {
       display: flex;
       margin: 0 20px;
       padding-top: 20px;
       height: 100px;
-      &:last-child {
-        padding-bottom: 20px;
-      }
-      .icon {
+      .van-image {
         flex: 0 0 100px;
         width: 100px;
         height: 100px;
@@ -85,7 +101,7 @@ export default {
         justify-content: center;
         padding: 0 20px;
         height: 100px;
-        overflow: hidden;
+        overflow: scroll;
         background: $color-highlight-background;
         color: $color-text-d;
         font-size: $font-size-small;
