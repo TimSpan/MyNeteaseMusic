@@ -13,7 +13,7 @@
             >
               <!-- 图片 -->
 
-              <van-image :src="item.coverImgUrl">
+              <van-image :src="item.coverImgUrl" lazy-load>
                 <template v-slot:loading>
                   <van-loading type="spinner" size="20" />
                 </template>
@@ -22,8 +22,9 @@
               <ul class="song-list">
                 <li
                   class="song"
-                  v-for="(song, index) in item.songList"
+                  v-for="(song, index) in item.songs"
                   :key="song.id"
+                  lazy-load
                 >
                   <span>{{ index + 1 }}. </span>
                   <span>{{ song.name }}-{{ song.ar[0].name }}</span>
@@ -39,7 +40,7 @@
 
 <script>
 import topListMusic from './topListMusic/topListMusic.vue'
-import { getTopList, getTopListSongs } from '@/api/topList'
+import { getTopList, getLimitMusic } from '@/api/topList'
 export default {
   components: {
     topListMusic,
@@ -47,7 +48,6 @@ export default {
   data() {
     return {
       topList: [],
-      AllSongs: [],
     }
   },
   async created() {
@@ -62,12 +62,10 @@ export default {
       const id = JSON.stringify(item.id)
       // console.log(id);
 
-      // 获取所有歌曲
-      const { data } = await getTopListSongs(id)
-      // console.log(data);//所有歌曲
-      this.AllSongs.push(data.playlist.tracks) //存储所有歌曲
-
-      this.topList[index].songList = data.playlist.tracks.splice(0, 3) //要添加进数组的元素
+      const { data } = await getLimitMusic(id)// 限制了获取3首歌
+      // console.log(data);
+      this.topList[index].songs = data.songs //要添加进数组的元素
+  
     })
   },
   methods: {},

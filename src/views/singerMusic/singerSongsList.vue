@@ -6,12 +6,11 @@
       </div>
 
       <!-- 标题 -->
-      <h1 class="title">{{ name }}</h1>
+      <h1 class="title">{{ state.name }}</h1>
     </div>
 
     <div class="bg-image">
-      <!-- <img class="images" :src="playlist.coverImgUrl" alt="" /> -->
-      <van-image class="images" :src="img">
+      <van-image class="images" :src="state.img">
         <template v-slot:loading>
           <van-loading />
         </template>
@@ -24,12 +23,72 @@
         </div>
       </div>
     </div>
+    <!-- 底部 -->
+
+    <ul class="song-list">
+      <li
+        @click="playMusic(index)"
+        class="item"
+        v-for="(song, index) in state.singerTopSongs"
+        :key="index"
+      >
+        <div class="column">
+          <h2 class="name">{{ song.name }}</h2>
+        </div>
+      </li>
+    </ul>
   </div>
 </template>
 
 <script>
+import { getSingerSongs } from '@/api/singer'
+// 使用useRoute 拿到路由跳转传过去的 歌手id，然后用这个id 获取歌手热门歌曲
+import { useRoute } from 'vue-router'
+import { onMounted, reactive } from 'vue'
+import { mapMutations, mapState } from 'vuex'
+
 export default {
-  props: ['singerTopSongs', 'img', 'name'],
+  name: 'SingerSongsList',
+  setup() {
+    const state = reactive({
+      singerTopSongs: [], //歌手的热门歌曲
+      img: '',
+      name: '',
+    })
+    onMounted(async () => {
+      // console.log(singerId)
+      let img = useRoute().query.img
+      let name = useRoute().query.name
+      state.img = img
+      state.name = name
+
+      // 获取歌手热门歌曲
+      // 拿到歌手id
+      // console.log(useRoute());
+      // 通过打印可以看到 id 储存在 query 的value 的id这里 。这个value是作为query 的一个属性存在
+      let singerId = useRoute().query.id
+      let res = await getSingerSongs(singerId)
+      state.singerTopSongs = res.data.songs
+    })
+    return { state }
+  },
+  computed: {
+    ...mapState(['playList', 'playListIndex', 'currentTime', 'lyricList']),
+  },
+  methods: {
+    playMusic: function (index) {
+      // 接收传递过来的歌曲下标
+      this.updatePlayList(this.state.singerTopSongs) // 更新vuex 的歌曲列表
+      this.updatePlayListIndex(index) // 更新vuex 的歌曲歌曲下标
+      this.updateIsBtnShow(false) // 更新播放按钮的布尔值
+      this.$store.dispatch('getLyric', this.playList[this.playListIndex].id) // 更新歌词
+    },
+    ...mapMutations([
+      'updatePlayList',
+      'updatePlayListIndex',
+      'updateIsBtnShow',
+    ]),
+  },
 }
 </script>
 
@@ -43,6 +102,7 @@ export default {
   position: relative;
   height: 100%;
   width: 100%;
+  margin-bottom: 1.2rem;
   .fixed {
     position: fixed;
     background-color: #333;
@@ -58,7 +118,7 @@ export default {
     left: 0.12rem;
     z-index: 20;
     transform: translateZ(2px);
-    
+
     .icon-back {
       display: block;
       line-height: 40px;
@@ -125,6 +185,32 @@ export default {
         display: inline-block;
         vertical-align: middle;
         font-size: $font-size-small;
+      }
+    }
+  }
+  .song-list {
+    margin-bottom: 30px;
+    .item {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      box-sizing: border-box;
+      height: 64px;
+      font-size: $font-size-medium;
+      padding-left: 0.4rem;
+
+      .name {
+        width: 100%;
+        margin-bottom: 2px;
+        @include no-wrap();
+        font-size: $font-size-medium;
+        color: $color-text;
+      }
+      .desc {
+        @include no-wrap();
+        font-size: $font-size-small;
+        color: $color-text-d;
       }
     }
   }

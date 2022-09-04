@@ -1,39 +1,49 @@
 <template>
-  <div class="recommend">
-    <div class="recommend-content">
-      <div class="recommend-list">
-        <h1 class="list-title">热门歌单推荐</h1>
-        <ul>
-          <li v-for="item in state.musicList" class="item" :key="item.id">
-            <!-- 路由跳转 *********************-->
-            <router-link
-              class="item"
-              :to="{ path: '/hotSongMusic', query: { id: item.id } }"
-            >
-              <div class="icon">
-                <van-image class="images" :src="item.picUrl" width="60" height="60">
-                  <template v-slot:loading>
-                    <van-loading type="spinner" size="20" />
-                  </template>
-                </van-image>
-          
+  <keep-alive>
+    <div class="recommend">
+      <div class="recommend-content">
+        <div class="recommend-list">
+          <h1 class="list-title">热门歌单推荐</h1>
+          <ul>
+            <li v-for="item in state.musicList" class="item" :key="item.id">
+              <!-- 路由跳转 *********************-->
+              <router-link
+                class="item"
+                :to="{
+                  path: '/hotSongMusic',
+                  query: { id: item.id, name: item.name, img: item.picUrl },
+                }"
+              >
+                <div class="icon">
+                  <van-image
+                    lazy-load
+                    class="images"
+                    :src="item.picUrl"
+                    width="60"
+                    height="60"
+                  >
+                    <template v-slot:loading>
+                      <van-loading type="spinner" size="20" />
+                    </template>
+                  </van-image>
 
-                <!-- <img width="60" height="60"  :src="item.picUrl" /> -->
-              </div>
-              <div class="text">
-                <h2 class="name">
-                  {{ item.name }}
-                </h2>
-                <p class="title">
-                  {{ item.name }}
-                </p>
-              </div>
-            </router-link>
-          </li>
-        </ul>
+                  <!-- <img width="60" height="60"  :src="item.picUrl" /> -->
+                </div>
+                <div class="text">
+                  <h2 class="name">
+                    {{ item.name }}
+                  </h2>
+                  <p class="title">
+                    {{ item.name }}
+                  </p>
+                </div>
+              </router-link>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
-  </div>
+  </keep-alive>
 </template>
 
 <script>
@@ -96,7 +106,7 @@ export default {
           flex: 0 0 60px;
           width: 60px;
           padding-right: 20px;
-          .images{
+          .images {
             background-size: cover;
           }
         }

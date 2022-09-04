@@ -9,7 +9,7 @@ cd dist
 # echo 'www.example.com' > CNAME
 git init
 git add -A
-git commit -m 'deploy'
+git commit -m '新增所有榜单'
 # 如果发布到 https://<USERNAME>.github.io
 git push -f git@gitee.com:timspan/k-music.git master
 # 如果发布到 https://<USERNAME>.github.io/<REPO>

@@ -1,44 +1,50 @@
 <template>
-  <div class="fixed">
-    <div class="back" @click="$router.go(-1)">
-      <i class="icon-back"></i>
+  
+    <div class="fixed">
+      <div class="back" @click="$router.go(-1)">
+        <i class="icon-back"></i>
+      </div>
+      <!-- 标题 -->
+      <h1 class="title">{{ state.name }}</h1>
     </div>
-    <!-- 标题 -->
-    <h1 class="title">{{ state.name }}</h1>
-  </div>
-  <!-- 歌曲列表 -->
-  <div class="top-list">
-    <div class="top-list-content">
-      <ul>
-        <li
-          v-for="(item, index) in state.topSongs"
-          :key="index"
-          class="item"
-          @click="playMusic(index)"
-        >
-          <span class="index">{{ index + 1 }}</span>
-          <van-image :src="item.al.picUrl" class="img">
-            <template v-slot:loading>
-              <van-loading type="spinner" size="20" />
-            </template>
-          </van-image>
+    <!-- 歌曲列表 -->
+    <keep-alive>
+    
+    
+    <div class="top-list">
+      <div class="top-list-content">
+        <ul>
+          <li
+            v-for="(item, index) in state.topSongs"
+            :key="index"
+            class="item"
+            @click="playMusic(index)"
+          >
+            <span class="index">{{ index + 1 }}</span>
+            <van-image :src="item.al.picUrl" class="img" lazy-load>
+              <template v-slot:loading>
+                <van-loading type="spinner" size="20" />
+              </template>
+            </van-image>
 
-          <div class="right">
-            <p class="name">{{ item.name }}</p>
-            <p class="singerName">
-              <span v-for="(item, i) in item.ar" :key="i">
-                {{ item.name }}</span
-              >
-            </p>
-          </div>
-        </li>
-      </ul>
+            <div class="right">
+              <p class="name">{{ item.name }}</p>
+              <p class="singerName">
+                <span v-for="(item, i) in item.ar" :key="i">
+                  {{ item.name }}</span
+                >
+              </p>
+            </div>
+          </li>
+        </ul>
+      </div>
     </div>
-  </div>
+  </keep-alive>
+
 </template>
 
 <script>
-import { getTopListSongs } from '@/api/topList'
+import { getLimitMusicTwo } from '@/api/topList'
 import { useRoute } from 'vue-router'
 import { reactive, onMounted } from 'vue'
 import { mapState, mapMutations } from 'vuex'
@@ -50,15 +56,13 @@ export default {
       topSongs: [], //所有歌曲列表
       name: '',
     })
-    // let topSongs = []
-
     onMounted(async () => {
       let topID = useRoute().query.id
       state.name = useRoute().query.name
-      let res = await getTopListSongs(topID)
+      let res = await getLimitMusicTwo(topID)
       // console.log(res)
-      state.topSongs = res.data.playlist.tracks
-      console.log(state.topSongs)
+      state.topSongs = res.data.songs
+      // console.log(state.topSongs)
     })
     return { state }
   },

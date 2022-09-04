@@ -1,11 +1,13 @@
 <template>
-  <div class="swiperTop">
-    <van-swipe :autoplay="1500" lazy-render>
-      <van-swipe-item v-for="image in state.images" :key="image">
-        <img :src="image.pic" />
-      </van-swipe-item>
-    </van-swipe>
-  </div>
+  <keep-alive>
+    <div class="swiperTop">
+      <van-swipe :autoplay="1500" lazy-render>
+        <van-swipe-item v-for="image in state.images" :key="image">
+          <img :src="image.pic" />
+        </van-swipe-item>
+      </van-swipe>
+    </div>
+  </keep-alive>
 </template>
 
 <script>

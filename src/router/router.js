@@ -5,7 +5,7 @@ const MV = () => import('@/views/mv.vue')
 const TopList = () => import('@/views/topList')
 const Search = () => import('@/views/search')
 const HotSongMusic = () => import('@/views/recommend/hotSongMusic')
-const SingerSongs = () => import('@/components/singer/singerSongsList.vue')
+const SingerSongsList = () => import('@/views/singerMusic/singerSongsList.vue')
 const TopListMusic = () => import('@/views/topListMusic/topListMusic.vue')
 
 const routes = [
@@ -25,8 +25,8 @@ const routes = [
     // meta 数据并不是只读的，我们可以在代码中根据需求动态地改变它。
   },
   {
-    path: '/singerSongs',// 歌手歌曲
-    component: SingerSongs,
+    path: '/SingerSongsList',// 歌手歌曲
+    component: SingerSongsList,
     meta:{a:true}
   },
   {
@@ -35,7 +35,7 @@ const routes = [
     meta:{a:true}
   },
   {
-    path: '/singer',
+    path: '/singer',//歌手
     component: Singer,
   },
   {

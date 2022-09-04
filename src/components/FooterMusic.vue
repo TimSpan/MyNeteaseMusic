@@ -68,14 +68,9 @@
 </template>
 
 <script>
-// import ProgressCircle from './progress-circle'
-// import useCd from './use-cd'
 import { formatTime } from '@/assets/js/util'
-
 import Player from './player.vue'
-// import { getMusicDuration } from '../api/item'
 import { mapState, useStore, mapMutations } from 'vuex'
-// import { onMounted, ref } from 'vue'
 export default {
   setup() {
     const store = useStore()

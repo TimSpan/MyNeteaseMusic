@@ -1,29 +1,20 @@
 <template>
   <div>
-    <h1>4---MV功能待开发</h1>
+    <h1>mv</h1>
   </div>
 </template>
 
 <script>
+import { getMV } from '@/api/mv'
+import { onMounted } from 'vue'
 export default {
-  name: 'MusicMyMv',
-
-  data() {
-    return {
-      
-    };
+  setup() {
+    onMounted(async () => {
+      let res = await getMV()
+      console.log(res)
+    })
   },
-
-  mounted() {
-    
-  },
-
-  methods: {
-    
-  },
-};
+}
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>
