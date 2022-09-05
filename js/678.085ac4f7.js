@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunknetease_music"]=self["webpackChunknetease_music"]||[]).push([[678],{5678:function(n,e,u){u.r(e),u.d(e,{default:function(){return f}});var t=u(6252);const r=(0,t._)("h1",null,"5---搜索功能待开发",-1),s=[r];function c(n,e){return(0,t.wg)(),(0,t.iD)("div",null,s)}var a=u(3744);const i={},l=(0,a.Z)(i,[["render",c]]);var f=l}}]);
+//# sourceMappingURL=678.085ac4f7.js.map

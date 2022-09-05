@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunknetease_music"]=self["webpackChunknetease_music"]||[]).push([[909],{5909:function(e,n,t){t.r(n),t.d(n,{default:function(){return f}});var u=t(6252);const r=(0,u._)("h1",null,"mv",-1),s=[r];function a(e,n,t,r,a,c){return(0,u.wg)(),(0,u.iD)("div",null,s)}var c=t(7389);function l(){return(0,c.Z)({method:"GET",url:"/personalized/mv"})}var i={setup(){(0,u.bv)((async()=>{let e=await l();console.log(e)}))}},o=t(3744);const v=(0,o.Z)(i,[["render",a]]);var f=v}}]);
+//# sourceMappingURL=909.769888d4.js.map
