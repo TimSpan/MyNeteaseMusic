@@ -1,5 +1,5 @@
 <template>
-  
+  <div class="container">
     <div class="fixed">
       <div class="back" @click="$router.go(-1)">
         <i class="icon-back"></i>
@@ -7,10 +7,9 @@
       <!-- 标题 -->
       <h1 class="title">{{ state.name }}</h1>
     </div>
+
     <!-- 歌曲列表 -->
-    <keep-alive>
-    
-    
+
     <div class="top-list">
       <div class="top-list-content">
         <ul>
@@ -39,8 +38,7 @@
         </ul>
       </div>
     </div>
-  </keep-alive>
-
+  </div>
 </template>
 
 <script>
@@ -83,111 +81,94 @@ export default {
       'updateIsBtnShow',
     ]),
   },
-  // data() {
-  //   return {
-  //     // topSongs: [],
-  //   }
-  // },
-
-  // async created() {
-  //   let id = this.$route.query.id
-  //   console.log(this.$route.query.id)
-  //   let res = await getTopListSongs(id)
-  //   console.log(res)
-  //   console.log(res.data.playlist.tracks);
-  //   // this.topSongs = res.data.playlist.tracks
-  //   // console.log(this.topSongs)
-  // },
 }
 </script>
 
 <style lang="scss" scoped>
-.fixed {
-  position: fixed;
-  background-color: #333;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 0.8rem;
-  z-index: 100;
-}
-.back {
-  position: absolute;
-  top: 0;
-  left: 0.12rem;
-  z-index: 20;
-  transform: translateZ(2px);
+.container {
+  .fixed {
+    position: fixed;
+    background-color: #333;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 0.8rem;
+    z-index: 100;
+    margin-bottom: 0.8rem;
+    // overflow: scroll;
+    .back {
+      position: absolute;
+      top: 0;
+      left: 0.12rem;
+      z-index: 20;
+      transform: translateZ(2px);
 
-  .icon-back {
-    display: block;
-    line-height: 40px;
-    padding-left: 0.2rem;
-    font-size: $font-size-large-x;
-    color: $color-theme;
-  }
-}
-.title {
-  position: relative;
-  // padding-left: 0.4rem;
-  top: 0;
-  left: 20%;
-  width: 60%;
-  z-index: 20;
-  transform: translateZ(2px);
-  @include no-wrap();
-  text-align: center;
-  // margin: 0 auto;
-  line-height: 40px;
-  font-size: $font-size-large;
-  color: $color-theme;
-}
-.top-list {
-  position: fixed;
-  width: 100%;
-  top: 0.8rem;
-  bottom: 0;
-  .top-list-content {
-    height: 100%;
-    overflow: scroll;
-    .item {
-      display: flex; // flex布局
-      align-items: center;
-
-      margin-top: 0.6rem;
-      height: 0.6rem;
-      .index {
-        margin-right: 0.2rem;
-        margin-left: 0.2rem;
+      .icon-back {
+        display: block;
+        line-height: 40px;
+        padding-left: 0.2rem;
+        font-size: $font-size-large-x;
         color: $color-theme;
-        width: 0.4rem;
-        text-align: center;
       }
+    }
+    .title {
+      position: relative;
+      // padding-left: 0.4rem;
+      top: 0;
+      left: 20%;
+      width: 60%;
+      z-index: 20;
+      transform: translateZ(2px);
+      text-align: center;
+      line-height: 40px;
+      font-size: $font-size-large;
+      color: $color-theme;
+    }
+  }
 
-      .van-image {
-        // flex: 0 0 0.6rem;
-        width: 1rem;
-        height: 1rem;
-        background-size: cover;
-        border-radius: 3px !important;
-      }
+  .top-list {
+    margin-bottom: 2.4rem;
+    position: relative;
+    top: 0.8rem;
+    .top-list-content {
+      .item {
+        display: flex; // flex布局
+        align-items: center;
 
-      .right {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        line-height: 0.5rem;
-        font-size: 0.2rem;
-        margin-left: 0.4rem;
-        @include no-wrap();
-        .name {
+        margin-top: 0.6rem;
+        height: 0.6rem;
+        .index {
+          margin-right: 0.2rem;
+          margin-left: 0.2rem;
+          color: $color-theme;
+          width: 0.4rem;
+          text-align: center;
         }
-        .singerName {
-          display: flex;
-          span {
-            margin-right: 0.4rem;
-          }
 
-          // justify-content: center;
+        .van-image {
+          // flex: 0 0 0.6rem;
+          width: 1rem;
+          height: 1rem;
+          background-size: cover;
+          border-radius: 3px !important;
+        }
+
+        .right {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          line-height: 0.5rem;
+          font-size: 0.2rem;
+          margin-left: 0.4rem;
+          @include no-wrap();
+          .name {
+          }
+          .singerName {
+            display: flex;
+            span {
+              margin-right: 0.4rem;
+            }
+          }
         }
       }
     }

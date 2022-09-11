@@ -67,7 +67,7 @@ export default {
       state.img = useRoute().query.img
       // 获取歌单所有歌曲
       let result = await getMusicAllList(id)
-      // console.log(result)
+      console.log(result)
       state.songs = result.data.songs
     })
     return { state }
@@ -102,6 +102,7 @@ export default {
   position: relative;
   height: 100%;
   width: 100%;
+  margin-bottom: 1.2rem;
   .fixed {
     position: fixed;
     background-color: #333;

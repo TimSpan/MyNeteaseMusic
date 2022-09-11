@@ -74,11 +74,11 @@ export default {
 
 <style lang="scss" scoped>
 .top-list {
-  position: fixed;
+  position: relative;
   width: 100%;
-  top: 88px;
+  // top: 88px;
   bottom: 0;
-  margin-bottom: 60px;
+  margin-bottom: 1.4rem;
   .top-list-content {
     height: 100%;
     overflow: scroll;

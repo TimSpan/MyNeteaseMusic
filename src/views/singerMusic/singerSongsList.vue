@@ -1,43 +1,45 @@
 <template>
-  <div class="music-list">
-    <div class="fixed background">
-      <div class="back" @click="$router.go(-1)">
-        <i class="icon-back"></i>
+  <keep-alive>
+    <div class="music-list">
+      <div class="fixed background">
+        <div class="back" @click="$router.go(-1)">
+          <i class="icon-back"></i>
+        </div>
+
+        <!-- 标题 -->
+        <h1 class="title">{{ state.name }}</h1>
       </div>
 
-      <!-- 标题 -->
-      <h1 class="title">{{ state.name }}</h1>
-    </div>
-
-    <div class="bg-image">
-      <van-image class="images" :src="state.img">
-        <template v-slot:loading>
-          <van-loading />
-        </template>
-      </van-image>
-      <!-- 随机播放全部 -->
-      <div class="play-btn-wrapper">
-        <div class="play-btn">
-          <i class="icon-play"></i>
-          <span class="text">随机播放全部</span>
+      <div class="bg-image">
+        <van-image class="images" :src="state.img">
+          <template v-slot:loading>
+            <van-loading />
+          </template>
+        </van-image>
+        <!-- 随机播放全部 -->
+        <div class="play-btn-wrapper">
+          <div class="play-btn">
+            <i class="icon-play"></i>
+            <span class="text">随机播放全部</span>
+          </div>
         </div>
       </div>
-    </div>
-    <!-- 底部 -->
+      <!-- 底部 -->
 
-    <ul class="song-list">
-      <li
-        @click="playMusic(index)"
-        class="item"
-        v-for="(song, index) in state.singerTopSongs"
-        :key="index"
-      >
-        <div class="column">
-          <h2 class="name">{{ song.name }}</h2>
-        </div>
-      </li>
-    </ul>
-  </div>
+      <ul class="song-list">
+        <li
+          @click="playMusic(index)"
+          class="item"
+          v-for="(song, index) in state.singerTopSongs"
+          :key="index"
+        >
+          <div class="column">
+            <h2 class="name">{{ song.name }}</h2>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </keep-alive>
 </template>
 
 <script>

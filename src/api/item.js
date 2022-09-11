@@ -7,10 +7,18 @@ export function getMusicList(data) {
   })
 }
 // 获取歌单所有歌曲
-export function getMusicAllList(data) {
+export function getMusicAllList(id) {
   return request({
     method: 'GET',
-    url: `/playlist/track/all?id=${data}&offset=0&limit=50`,
+    url: `/playlist/track/all?id=${id}&offset=0&limit=50`,
+  })
+}
+
+// 获取歌单详情
+export function getMusicDetail(id) {
+  return request({
+    method: 'GET',
+    url: `/playlist/detail?id=${id}&offset=0&limit=50`,
   })
 }
 //获取歌曲的歌词 /lyric?id=33894312

@@ -1,5 +1,6 @@
 import { createStore } from 'vuex'
 import { getMusicLyric } from '../api/item'
+import { getPhoneLogin } from '@/api/user'
 
 export default createStore({
   state: {
@@ -31,18 +32,25 @@ export default createStore({
     lyricLsit: {},// 歌词
     duration: 0,// 歌曲总时长
     // footerMusic:{} ,
+    isLogin: false, //判断是否登录
+    isFooterMusic: true, //判断底部组件是否需要显示
+    token: '',
+    user: {}, //用户信息
+    isLoginShow:true
   },
   getters: {},
   mutations: {
     
-
+    updateLoginShow: function (state, value) {
+      state.isLoginShow = value
+    },
     // updateFooterMusic:function (state,value) {
     //   state.footerMusic = value
     // },
 
     // 更新歌曲总时长
     updateDuration: function (state, value) {
-      state.duration = value
+      state.duration = !state.isLoginShow
     },
     
     // 更新当前时间,用于控制歌词显示
@@ -79,13 +87,16 @@ export default createStore({
       // console.log(res)
       context.commit('updatalyricLsit', res.data.lrc)
     },
+    getLogin: async function (context, value) {
+      let res = await getPhoneLogin(value)
+      console.log(res);
+      return res
+    },
   },
   modules: {},
   getters:{
     currentSong:(state) => {
       state.playList[state.playListIndex]
-      
-    }
-    
+    }    
   }
 })

@@ -10,7 +10,7 @@ set -e
 git init
 git status
 git add -A
-git commit -m '为了优化结构:删除了五个组件.为了提高网络性能:更改接口并且限制了获取歌曲的数目'
+git commit -m '新增搜索、登录页面,但并未完善功能,解决若干页面bug'
 # 如果发布到 https://<USERNAME>.github.io
 git push -f git@github.com:TimSpan/MyNeteaseMusic.git master
 # 如果发布到 https://<USERNAME>.github.io/<REPO>

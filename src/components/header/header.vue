@@ -3,12 +3,14 @@ import Header from '@/components/header/header.vue';
   <div class="header">
     <van-icon name="service" />
     <h1>Z-J-M专属网抑云音乐</h1>
+    <router-link class="mine" to="/login">
+      <i class="icon-mine"></i>
+    </router-link>
   </div>
 </template>
 
 <script>
-export default {
-}
+export default {}
 </script>
 <style lang="scss" scoped>
 .header {
@@ -17,7 +19,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  .van-icon{
+  .van-icon {
     margin-right: 0.2rem;
     color: $color-theme;
     font-size: 0.32rem;
@@ -25,6 +27,17 @@ export default {
   h1 {
     color: $color-theme;
     font-size: 0.32rem;
+  }
+  .mine {
+    position: absolute;
+    top: 0;
+    right: 0;
+    .icon-mine {
+      display: block;
+      padding: 12px;
+      font-size: $font-size-large-x;
+      color: $color-theme;
+    }
   }
 }
 

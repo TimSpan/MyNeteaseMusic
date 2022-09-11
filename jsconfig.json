@@ -2,7 +2,10 @@
   "compilerOptions": {
     "target": "es5",
     "module": "esnext",
-    "baseUrl": "/k-music/",
+    // "baseUrl": "/k-music/",
+    "baseUrl": "./",
+    // "baseUrl": "/MyNeteaseMusic/",
+
     "moduleResolution": "node",
     "paths": {
       "@/*": [

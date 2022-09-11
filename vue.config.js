@@ -1,5 +1,10 @@
 module.exports = {
-  publicPath:'/k-music/',
+  // publicPath: '/k-music/',
+  publicPath: './',
+
+  // publicPath: '/MyNeteaseMusic/',
+
+  
   css: {
     loaderOptions: {
       sass: {
@@ -12,7 +17,7 @@ module.exports = {
       },
     },
   },
-  devServer: {
-    proxy: 'http://1.117.229.35:3000/'
-  }
+  // devServer: {
+  //   proxy: 'http://1.117.229.35:3000/'
+  // }
 }

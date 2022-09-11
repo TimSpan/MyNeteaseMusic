@@ -5,8 +5,9 @@
     <keep-alive>
       <router-view></router-view>
     </keep-alive>
+    <!-- <FooterMusic v-show="$store.state.isFooterMusic"></FooterMusic> -->
 
-    <FooterMusic />
+    <FooterMusic v-show="!$route.meta.footer" ></FooterMusic>
   </div>
 </template>
 

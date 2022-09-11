@@ -7,7 +7,9 @@ const Search = () => import('@/views/search')
 const HotSongMusic = () => import('@/views/recommend/hotSongMusic')
 const SingerSongsList = () => import('@/views/singerMusic/singerSongsList.vue')
 const TopListMusic = () => import('@/views/topListMusic/topListMusic.vue')
+const Login = () => import('@/views/login')
 
+import store from '@/store/index.js'
 const routes = [
   {
     path: '/',
@@ -50,11 +52,25 @@ const routes = [
     path: '/search',
     component: Search,
   },
+  {
+    path: '/login',// 登录用户中心
+    component: Login,
+    meta:{a:true,footer:true}
+  },
 ]
 
 const router = createRouter({
   history: createWebHashHistory(),
   routes
+})
+//全局路由守卫，针对底部组件 的显示隐藏
+router.beforeEach((to,from) => {
+  if (to.path == '/logon') {
+    store.state.isFooterMusic = false
+  } else {
+    store.state.isFooterMusic = true
+    
+  }
 })
 
 export default router
