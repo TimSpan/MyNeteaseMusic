@@ -5,8 +5,7 @@
   "scripts": {
     "dev": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "up": "bash deploy.sh",
-    "up-github": "bash github-deploy.sh"
+    "up": "bash deploy.sh"
   },
   "dependencies": {
     "@better-scroll/core": "^2.2.1",
