@@ -10,9 +10,9 @@ set -e
 git init
 git status
 git add -A
-git commit -m '新增搜索、登录页面,但并未完善功能,解决若干页面bug'
+git commit -m 'deploy'
 # 如果发布到 https://<USERNAME>.github.io
-git push -f git@github.com:TimSpan/MyNeteaseMusic.git master
+git push -f https://github.com/TimSpan/MyNeteaseMusic.git gh-pages
 # 如果发布到 https://<USERNAME>.github.io/<REPO>
 # git push -f git@github.com:<USERNAME>/<REPO>.git master:gh-pages
 # git push -f git@gitee.com:timspan/kblog.git master:gh-pages
